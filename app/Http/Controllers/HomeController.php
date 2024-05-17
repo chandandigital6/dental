@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
+use App\Models\Banner;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index(){
-        return view('front.index');
+        $banner=Banner::all();
+        $about=About::all();
+        return view('front.index',compact('banner','about'));
       }
       public function about(){
           return view('front.about');

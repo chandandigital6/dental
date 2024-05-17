@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\LanguageController;
 use App\Http\Controllers\Dashboard\PermissionController;
@@ -10,6 +13,7 @@ use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\TrafficsController;
 use App\Models\Language;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
@@ -24,6 +28,33 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/migrate', function () {
+    $exitCode = Artisan::call('migrate:fresh', ['--seed' => true]);
+    if ($exitCode === 0) {
+        return 'Migration successful';
+    } else {
+        return 'Migration failed'; // You can customize this message as needed
+
+    }
+});
+Route::get('/foo', function () {
+    $exitCode = Artisan::call('storage:link');
+    if ($exitCode === 0) {
+        return 'Success';
+    } else {
+        return 'Failed'; // You can customize this message as needed
+    }
+});
+
+Route::get('/onlyMigrate', function () {
+    $exitCode = Artisan::call('migrate');
+    if ($exitCode === 0) {
+        return 'Migration successful';
+    } else {
+        return 'Migration failed'; // You can customize this message as needed
+
+    }
+});
 
 Route::middleware(['splade'])->group(function () {
     // Registers routes to support the interactive components...
@@ -68,6 +99,7 @@ Route::middleware(['splade'])->group(function () {
     Route::get('/testimonial',[HomeController::class,'testimonial'])->name('testimonial');
     Route::get('/price',[HomeController::class,'price'])->name('price');
     Route::get('/appointment',[HomeController::class,'appointment'])->name('appointment');
+
     Route::prefix('dashboard')->middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->name('dashboard.')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
         Route::resource('user', UserController::class);
@@ -92,5 +124,38 @@ Route::middleware(['splade'])->group(function () {
             Route::post('/{plugin}/deactivate',[PluginController::class,'deactivate'])->name('deactivate');
             Route::post('/{plugin}/delete',[PluginController::class,'delete'])->name('delete');
         });
+        Route::prefix('banner')->name('banner.')->group(function(){
+            Route::get('/',[BannerController::class,'index'])->name('index');
+            Route::get('/create',[BannerController::class,'create'])->name('create');
+            Route::post('/store',[BannerController::class,'store'])->name('store');
+            Route::get('/edit/{banner}',[BannerController::class,'edit'])->name('edit');
+            Route::put('/update/{banner}',[BannerController::class,'update'])->name('update');
+            Route::get('/delete/{banner}',[BannerController::class,'delete'])->name('delete');
+            Route::get('/duplicate/{banner}',[BannerController::class,'duplicate'])->name('duplicate');
+
+        });
+
+        Route::prefix('about')->name('about.')->group(function(){
+            Route::get('/',[AboutController::class,'index'])->name('index');
+            Route::get('/create',[AboutController::class,'create'])->name('create');
+            Route::post('/store',[AboutController::class,'store'])->name('store');
+            Route::get('/edit/{about}',[AboutController::class,'edit'])->name('edit');
+            Route::put('/update/{about}',[AboutController::class,'update'])->name('update');
+            Route::get('/delete/{about}',[AboutController::class,'delete'])->name('delete');
+            Route::get('/duplicate/{about}',[AboutController::class,'duplicate'])->name('duplicate');
+
+        });
+
+        Route::prefix('appointment')->name('appointment.')->group(function(){
+            Route::get('/',[AppointmentController::class,'index'])->name('index');
+            Route::get('/create',[AppointmentController::class,'create'])->name('create');
+            Route::post('/store',[AppointmentController::class,'store'])->name('store');
+            Route::get('/edit/{appointment}',[AppointmentController::class,'edit'])->name('edit');
+            Route::put('/update/{appointment}',[AppointmentController::class,'update'])->name('update');
+            Route::get('/delete/{appointment}',[AppointmentController::class,'delete'])->name('delete');
+            Route::get('/duplicate/{appointment}',[AppointmentController::class,'duplicate'])->name('duplicate');
+
+        });
+
     });
 });

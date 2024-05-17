@@ -15,6 +15,24 @@
                 <span class="mx-2 text-sm">@lang('main.home')</span>
             </Link>
 
+            {{-- Home banner --}}
+            <Link href="{{ route('dashboard.banner.index') }}" class="{{ request()->routeIs('dashboard.banner.index') ? 'bg-indigo-50 dark:bg-indigo-400 text-gray-700 dark:text-white font-semibold' : '' }} text-sm py-3 my-0 mx-2 flex items-center whitespace-nowrap px-4 font-medium text-gray-500 dark:text-white hover:bg-indigo-50 dark:hover:bg-indigo-400 rounded-lg shadow-none transition-colors ease-in-out">
+            <i class="fa-solid fa-house"></i>
+            <span class="mx-2 text-sm">Banners</span>
+            </Link>
+
+            {{-- Home about --}}
+            <Link href="{{ route('dashboard.about.index') }}" class="{{ request()->routeIs('dashboard.about.index') ? 'bg-indigo-50 dark:bg-indigo-400 text-gray-700 dark:text-white font-semibold' : '' }} text-sm py-3 my-0 mx-2 flex items-center whitespace-nowrap px-4 font-medium text-gray-500 dark:text-white hover:bg-indigo-50 dark:hover:bg-indigo-400 rounded-lg shadow-none transition-colors ease-in-out">
+            <i class="fa-solid fa-house"></i>
+            <span class="mx-2 text-sm">About</span>
+            </Link>
+
+            {{-- Home appoinment --}}
+            <Link href="{{ route('dashboard.appointment.index') }}" class="{{ request()->routeIs('dashboard.appointment.index') ? 'bg-indigo-50 dark:bg-indigo-400 text-gray-700 dark:text-white font-semibold' : '' }} text-sm py-3 my-0 mx-2 flex items-center whitespace-nowrap px-4 font-medium text-gray-500 dark:text-white hover:bg-indigo-50 dark:hover:bg-indigo-400 rounded-lg shadow-none transition-colors ease-in-out">
+            <i class="fa-solid fa-house"></i>
+            <span class="mx-2 text-sm">Appointment</span>
+            </Link>
+
             {{-- Plugins --}}
             @php
                 $plugins = Module::allEnabled();

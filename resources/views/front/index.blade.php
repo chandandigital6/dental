@@ -27,40 +27,68 @@
 <div class="container-fluid p-0">
     <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="w-100" src="{{asset('asset/img/carousel-1.jpg')}}" alt="Image">
-                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                    <div class="p-3" style="max-width: 900px;">
-                        <h5 class="text-white text-uppercase mb-3 animated slideInDown">Keep Your Teeth Healthy</h5>
-                        <h1 class="display-1 text-white mb-md-4 animated zoomIn">Take The Best Quality Dental Treatment</h1>
-                        <a href="appointment.html" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Appointment</a>
-                        <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Contact Us</a>
+            @foreach($banner as $key => $bannerItem)
+                <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+                    <img class="w-100" src="{{ asset('storage/' . $bannerItem->image) }}" alt="Banner Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+{{--                            <h5 class="text-white text-uppercase mb-3 animated slideInDown">{{ $bannerItem->title }}</h5>--}}
+                            <h5 class="text-white text-uppercase mb-3 animated slideInDown">Keep Your Teeth Healthy</h5>
+                            <h1 class="display-1 text-white mb-md-4 animated zoomIn">{{$bannerItem->title}}</h1>
+                            <a href="{{route('appointment')}}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Appointment</a>
+                            <a href="{{route('contact')}}" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Contact Us</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <img class="w-100" src="{{asset('asset/img/carousel-2.jpg')}}" alt="Image">
-                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                    <div class="p-3" style="max-width: 900px;">
-                        <h5 class="text-white text-uppercase mb-3 animated slideInDown">Keep Your Teeth Healthy</h5>
-                        <h1 class="display-1 text-white mb-md-4 animated zoomIn">Take The Best Quality Dental Treatment</h1>
-                        <a href="appointment.html" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Appointment</a>
-                        <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Contact Us</a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
-                data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
-                data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#header-carousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
     </div>
+
+    {{--    <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">--}}
+{{--       --}}
+{{--        <div class="carousel-inner">--}}
+{{--            <div class="carousel-item active">--}}
+{{--                <img class="w-100" src="{{asset('asset/img/carousel-1.jpg')}}" alt="Image">--}}
+{{--                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">--}}
+{{--                    <div class="p-3" style="max-width: 900px;">--}}
+{{--                        <h5 class="text-white text-uppercase mb-3 animated slideInDown">Keep Your Teeth Healthy</h5>--}}
+{{--                        <h1 class="display-1 text-white mb-md-4 animated zoomIn">Take The Best Quality Dental Treatment</h1>--}}
+{{--                        <a href="appointment.html" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Appointment</a>--}}
+{{--                        <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Contact Us</a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="carousel-item">--}}
+{{--                <img class="w-100" src="{{asset('asset/img/carousel-2.jpg')}}" alt="Image">--}}
+{{--                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">--}}
+{{--                    <div class="p-3" style="max-width: 900px;">--}}
+{{--                        <h5 class="text-white text-uppercase mb-3 animated slideInDown">Keep Your Teeth Healthy</h5>--}}
+{{--                        <h1 class="display-1 text-white mb-md-4 animated zoomIn">Take The Best Quality Dental Treatment</h1>--}}
+{{--                        <a href="appointment.html" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Appointment</a>--}}
+{{--                        <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Contact Us</a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--        <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"--}}
+{{--                data-bs-slide="prev">--}}
+{{--            <span class="carousel-control-prev-icon" aria-hidden="true"></span>--}}
+{{--            <span class="visually-hidden">Previous</span>--}}
+{{--        </button>--}}
+{{--        <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"--}}
+{{--                data-bs-slide="next">--}}
+{{--            <span class="carousel-control-next-icon" aria-hidden="true"></span>--}}
+{{--            <span class="visually-hidden">Next</span>--}}
+{{--        </button>--}}
+{{--    </div>--}}
 </div>
 <!-- Carousel End -->
 
@@ -115,18 +143,20 @@
 </div>
 <!-- Banner Start -->
 
-
 <!-- About Start -->
 <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+    @foreach($about as $abouts)
+
+
     <div class="container">
         <div class="row g-5">
             <div class="col-lg-7">
                 <div class="section-title mb-4">
-                    <h5 class="position-relative d-inline-block text-primary text-uppercase">About Us</h5>
-                    <h1 class="display-5 mb-0">The World's Best Dental Clinic That You Can Trust</h1>
+                    <h5 class="position-relative d-inline-block text-primary text-uppercase">{{$abouts->title}}</h5>
+                    <h1 class="display-5 mb-0">{{$abouts->heading}}</h1>
                 </div>
-                <h4 class="text-body fst-italic mb-4">Diam dolor diam ipsum sit. Clita erat ipsum et lorem stet no lorem sit clita duo justo magna dolore</h4>
-                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor eirmod magna dolore erat amet</p>
+{{--                <h4 class="text-body fst-italic mb-4">Diam dolor diam ipsum sit. Clita erat ipsum et lorem stet no lorem sit clita duo justo magna dolore</h4>--}}
+                <p class="mb-4">{!! $abouts->description !!}</p>
                 <div class="row g-3">
                     <div class="col-sm-6 wow zoomIn" data-wow-delay="0.3s">
                         <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>Award Winning</h5>
@@ -137,15 +167,17 @@
                         <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>Fair Prices</h5>
                     </div>
                 </div>
-                <a href="appointment.html" class="btn btn-primary py-3 px-5 mt-4 wow zoomIn" data-wow-delay="0.6s">Make Appointment</a>
+                <a href="{{route('appointment')}}" class="btn btn-primary py-3 px-5 mt-4 wow zoomIn" data-wow-delay="0.6s">Make Appointment</a>
             </div>
             <div class="col-lg-5" style="min-height: 500px;">
                 <div class="position-relative h-100">
-                    <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s" src="{{asset('asset/img/about.jpg')}}" style="object-fit: cover;">
+                    <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s" src="{{asset('storage/'.$abouts->images)}}" style="object-fit: cover;">
                 </div>
             </div>
         </div>
     </div>
+
+    @endforeach
 </div>
 <!-- About End -->
 
@@ -163,43 +195,50 @@
             <div class="col-lg-6">
                 <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
                     <h1 class="text-white mb-4">Make Appointment</h1>
-                    <form>
+                    <form action="{{route('dashboard.appointment.store')}}" method="post" enctype="multipart/form-data">
+                        @csrf
+
                         <div class="row g-3">
                             <div class="col-12 col-sm-6">
-                                <select class="form-select bg-light border-0" style="height: 55px;">
+                                <select name="service" class="form-select bg-light border-0" style="height: 55px;">
                                     <option selected>Select A Service</option>
-                                    <option value="1">Service 1</option>
-                                    <option value="2">Service 2</option>
-                                    <option value="3">Service 3</option>
+                                    <option value="dental">dental clean</option>
+                                    <option value="dentist">Service 2</option>
+                                    <option value="demo">Service 3</option>
                                 </select>
                             </div>
                             <div class="col-12 col-sm-6">
-                                <select class="form-select bg-light border-0" style="height: 55px;">
+                                <select name="doctor" class="form-select bg-light border-0" style="height: 55px;">
                                     <option selected>Select Doctor</option>
-                                    <option value="1">Doctor 1</option>
-                                    <option value="2">Doctor 2</option>
-                                    <option value="3">Doctor 3</option>
+                                    <option value="chandan">chandan 1</option>
+                                    <option value="tabrej">tabrej 2</option>
+                                    <option value="kajal">kajal 3</option>
                                 </select>
                             </div>
+
                             <div class="col-12 col-sm-6">
-                                <input type="text" class="form-control bg-light border-0" placeholder="Your Name" style="height: 55px;">
+                                <input type="text" name="name" class="form-control bg-light border-0" placeholder="Your Name" style="height: 55px;">
                             </div>
                             <div class="col-12 col-sm-6">
-                                <input type="email" class="form-control bg-light border-0" placeholder="Your Email" style="height: 55px;">
+                                <input type="email" name="email" class="form-control bg-light border-0" placeholder="Your Email" style="height: 55px;">
                             </div>
                             <div class="col-12 col-sm-6">
                                 <div class="date" id="date1" data-target-input="nearest">
-                                    <input type="text"
+                                    <input type="date"
                                            class="form-control bg-light border-0 datetimepicker-input"
-                                           placeholder="Appointment Date" data-target="#date1" data-toggle="datetimepicker" style="height: 55px;">
+                                           placeholder="Appointment Date" name="date" data-target="#date1" data-toggle="datetimepicker" style="height: 55px;">
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6">
                                 <div class="time" id="time1" data-target-input="nearest">
-                                    <input type="text"
+                                    <input type="time"
                                            class="form-control bg-light border-0 datetimepicker-input"
-                                           placeholder="Appointment Time" data-target="#time1" data-toggle="datetimepicker" style="height: 55px;">
+                                           placeholder="Appointment Time" name="time" data-target="#time1" data-toggle="datetimepicker" style="height: 55px;">
                                 </div>
+                            </div>
+                            <div class="col-12 ">
+                                <input type="number" class="form-control bg-light border-0" placeholder="Your number" name="number" style="height: 55px;">
+
                             </div>
                             <div class="col-12">
                                 <button class="btn btn-dark w-100 py-3" type="submit">Make Appointment</button>
